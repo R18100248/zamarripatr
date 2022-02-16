@@ -1,0 +1,46 @@
+/*Color de fondo y fuente de la página*/
+body{
+    background-color: antiquewhite;
+    font-family: Arial;
+}
+
+/*Centrar la tabla*/
+#main-container{
+    margin: 150px auto;
+    width: 600px;
+}
+
+/*Ancho */
+table th{
+    width: 15em;
+}
+
+/*Alineación del texto de la tabla, color de fondo de la tabla*/
+table{
+    border-collapse: collapse;
+    background-color: white;
+    text-align: center;
+}
+
+th, td{
+    border: 0;
+    padding: 13px;
+}
+
+/*Color del encabezado, color de la letra y borde*/
+thead{
+    background-color: #246355;
+    border-bottom: solid 5px #0F362D;
+    color: white;
+}
+
+/*Sombrear los hijos par de la tabla*/
+tr:nth-child(even){
+    background-color: #ddd;
+}
+
+/*Color de iluminado de filas*/
+tr:hover td{
+    background-color: #369681;
+    color: white;
+}
