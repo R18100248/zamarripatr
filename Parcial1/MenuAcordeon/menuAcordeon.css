@@ -1,0 +1,51 @@
+body{
+    background-color: darksalmon;
+    font-family: Arial;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+ul {
+    list-style: none;
+    width: 200px;
+    height: 500px;
+}
+
+ul > li > ul {
+    display: none;
+}
+
+ul > li:target > ul {
+    background: rgba(220, 20, 60, 0.8);
+    display: block;
+    height: 100%;
+}
+
+.opcion {
+    display: block;
+    padding: 15px;
+    background: crimson;
+    font-size: 20px;
+    border-bottom: 1px solid white;
+}
+
+.subOpcion {
+    background:gray;
+    color: black;
+    padding-left: 5%;
+    border-bottom: 1px solid black;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
+#main-container{
+    margin: 150px auto;
+    width: 600px;
+}
