@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evitando CORS (Etiqueta form - 18100248)</title>
+</head>
+<body>
+    <form target="resultado" action="http://localhost:8081/alumnos/:sistemas">
+        <button type="submit" id="btn1">Petición Formulario</button>
+        <button type="button" id="btn2">Petición Fetch (Asíncrona)</button>
+    </form>
+    <iframe name="resultado"></iframe>
+    
+    <script>
+        document.getElementById("btn2").addEventListener("click",()=>
+        {
+            fetch('http://localhost:8081/alumnos/:sistemas')
+            .then(respuesta=>respuesta.json())
+            .then(dato=>console.log(dato))
+        })
+    </script>
+</body>
+</html>
