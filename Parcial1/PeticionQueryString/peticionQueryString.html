@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>18100248 - Ejercicio: Petición Query String</title>
+</head>
+<style>
+    /* Color de fondo y fuente de la página */
+    *
+    {
+        box-sizing: border-box;
+        margin: 0;
+        /*padding: 0;*/
+    }
+    body
+    {
+        background-color: gray;
+        font-family: Arial;
+    }
+    .encabezado
+    {
+        background-color: black;
+        border: 5px solid red;
+        text-align: center;
+        color: white;
+    }
+    .caja
+    {
+        font-family: Arial;
+        text-align: justify;
+        font-size: 24px;
+    }
+</style>
+<body>
+    <div class="encabezado">
+        <h1><b><i>EJERCICIO EN CLASE: PETICION CON PARAMETROS (QUERY STRING)</i></b></h1>
+        <center><img src=".\img\chucknorris_logo_coloured_small.png" width="200" height="100"></center>
+    </div>
+    <h2><center><b>18100248 - ROGELIO ZAMARRIPA TREVIÑO</b></center></h2>
+    <h2><b><i>¿PARA QUÉ SIRVE <u>Chuck Norris Jokes API</u>?</i></b></h2>
+    <p><b><u>api.chucknorris.io</u></b> es una API JSON (interfaz de programación de aplicaciones) de servicio público y gratuito para obtener datos y bromas sobre Chuck Norris cuidadosamente seleccionados.</p>
+    <br><p>Además, puede escribir <b>/chuck {category_name}</b> (nombre de categoría) para obtener una broma aleatoria de una categoría determinada. Escriba <b>/chuck -cat</b> para mostrar una lista de todas las categorías disponibles.</p>
+    <br>
+    <h2><center><b><u>LISTA DE CATEGORIAS PARA BROMAS/DATOS</u></b></center></h2>
+    <center>
+    <select id="listaCategorias">
+    </select>
+    <button id="btnPedir">GetChuck</button>
+    <br>
+    <div id="caja"></div></center>
+
+    <script>
+        fetch('https://api.chucknorris.io/jokes/categories')
+        .then(respuesta => respuesta.json())
+        .then(function(datoJson){
+            for(i=0; i<datoJson.length; i++)
+            {
+                console.log(datoJson[i]);
+                let opcion = document.createElement('option');
+                opcion.value = datoJson[i];
+                opcion.text = datoJson[i];
+                document.getElementById("listaCategorias").appendChild(opcion);
+            }
+        });
+    
+        document.getElementById("btnPedir").addEventListener("click",function()
+        {
+            let seleccion = document.getElementById('listaCategorias').value
+            let peticion = 'https://api.chucknorris.io/jokes/random?category='+seleccion;
+    
+            fetch(peticion)
+            .then(response=>response.json())
+            .then(function(datoJson)
+            {
+                document.getElementById("caja").innerText = datoJson.value;
+            })
+        })
+    </script>
+</body>
+</html>
