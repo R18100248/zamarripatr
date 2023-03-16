@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarea: Grid (18100248) </title>
+    <link href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css" rel="stylesheet" />
+</head>
+<style>
+    .encabezado
+    {
+        border: 5px solid red;
+        text-align: center;
+        font-family: Arial;
+    }
+</style>
+<body>
+    <div class="encabezado">
+        <h1>Tarea: Grid - Tabla productosAlimenticios</h1>
+        <h2>Rogelio Zamarripa Treviño - 18100248</h2>
+    </div>
+    <div id="wrapper" class="wrapper"></div>
+
+    <script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
+    <script>
+
+        async function traerDatos() {
+            let headersList =
+            {
+                "Accept": "*/*",
+            }
+
+            let response = await fetch("http://localhost:8082/productosAlimenticios/", {
+                method: "GET",
+                headers: headersList
+            });
+
+            let productosAlimenticios = await response.json();
+            console.log(productosAlimenticios);
+
+            new gridjs.Grid({
+                columns: ["codigoProducto", "nombreProducto", "departamento", "proveedorProducto", "codigoProveedor", "precioCompra", "precioVenta", "cantProdVendidos", "cantProdExistentes", "estadoProducto"],
+                data: productosAlimenticios
+            }).render(document.getElementById("wrapper"));
+        }
+        
+        traerDatos();
+        
+    </script>
+</body>
+
+</html>
