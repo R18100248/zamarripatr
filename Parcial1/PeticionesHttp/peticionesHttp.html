@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>18100248 - Tarea: Peticiones Http</title>
+    <script src="jquery-3.6.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<style>
+    /* Color de fondo y fuente de la página */
+    *
+    {
+        box-sizing: border-box;
+        margin: 0;
+        /*padding: 0;*/
+    }
+    body
+    {
+        background-color: gray;
+        font-family: Arial;
+    }
+    .encabezado
+    {
+        background-color: black;
+        border: 5px solid red;
+        text-align: center;
+        color: white;
+    }
+    .informacionGato
+    {
+        font-family: Arial;
+        text-align: justify;
+        font-size: 24px;
+    }
+</style>
+<body>
+    <div class="encabezado">
+        <h1><b><i>TAREA: PETICIONES HTTP</i></b></h1>
+        <center><img src=".\img\cat_facts_api.png" width="100" height="100">
+        <img src=".\img\9RGJ5Ea.png" width="350" height="100"></center>
+    </div>
+    <h2><center><b>18100248 - ROGELIO ZAMARRIPA TREVIÑO</b></center></h2>
+    <h2><b><i>¿PARA QUÉ SIRVEN <u>TheCatAPI</u> y <u>CatFacts</u>?</i></b></h2>
+    <p><b><u>TheCatAPI</u></b> es una API (interfaz de programación de aplicaciones) de servicio público sobre imágenes aleatorias de gatos, de uso gratuito al crear una nueva aplicación, sitio web o servicio.</p>
+    <br><p>Usando una combinación de <b>Node.js</b>, <b>Angular</b> y <b>Tasker</b>, <b><u>CatFacts</u></b> combinará las API y los servicios de la web para enviar información y datos aleatorios sobre los gatos.</p>
+    <br>
+    <h3><center><b>OBTENER IMAGEN E INFORMACION ALEATORIA</b></center></h3>
+    <center><button id="btnPeticionFetch">BOTON FETCH</button>
+        <button id="btnAsyncAwait">BOTON ASYNC AWAIT</button>
+        <button id="btnXMLHttpRequest">BOTON XML HTTP REQUEST</button>
+        <button id="btnPeticionJQuery">BOTON JQUERY</button>
+        <button id="btnPeticionAxios">BOTON AXIOS</button></center>
+    <br>
+    <div class="informacionGato" id="informacionGato">
+    </div>
+    <div class="imagenGato" id="imagenGato">
+    </div>
+
+    <script>
+        //Petición Fetch
+        document.getElementById("btnPeticionFetch").addEventListener("click",function()
+        {
+            //IMAGEN ALEATORIA
+            var link = 'https://api.thecatapi.com/v1/images/search';
+            fetch(link)
+            .then((respuesta) => {
+                return respuesta.json();
+            })
+            
+            .then((imagenJson) => {
+                console.log(imagenJson);
+                var url = imagenJson[0].url;
+                var img = "<center><img src ='"+url+"' height=200 width=300></center>";
+                document.getElementById("imagenGato").innerHTML = img;
+                console.log("Click en botón BOTON FETCH - Imagen Aleatoria Generada")
+            });
+
+            //DATO ALEATORIO
+            var linkDos = 'https://catfact.ninja/fact';
+            fetch(linkDos)
+            .then(respuestaDos => respuestaDos.json())
+            .then(informacionJson => document.getElementById("informacionGato").innerText = informacionJson.fact);
+            console.log("Click en botón BOTON FETCH - Información Aleatoria Generada")
+        })
+
+        //Petición AsyncAwait
+        document.getElementById("btnAsyncAwait").addEventListener("click",async function()
+        {
+            //IMAGEN ALEATORIA
+            var link = 'https://api.thecatapi.com/v1/images/search';
+
+            let respuesta = await fetch(link);
+            let datoJson = await respuesta.json();
+
+            var url = datoJson[0].url;
+            var img = "<center><img src ='"+url+"' height=200 width=300></center>";
+            document.getElementById("imagenGato").innerHTML = img;
+            console.log("Click en botón BOTON ASYNC AWAIT - Imagen Aleatoria Generada")
+
+            //DATO ALEATORIO
+            var linkDos = 'https://catfact.ninja/fact';
+
+            let respuestaDos = await fetch(linkDos);
+            let informacionJson = await respuestaDos.json();
+            document.getElementById("informacionGato").innerText = informacionJson.fact;
+            console.log("Click en botón BOTON ASYNC AWAIT - Información Aleatoria Generada")            
+        })
+
+        //Petición XMLHttpRequest
+        document.getElementById("btnXMLHttpRequest").addEventListener("click",function()
+        {
+            //IMAGEN ALEATORIA
+            const xhr = new XMLHttpRequest();
+
+            xhr.addEventListener("readystatechange", function () {
+                if (this.readyState === this.DONE) {
+                    let objeto = JSON.parse(this.responseText);
+
+                    var url = objeto[0].url;
+                    var img = "<center><img src ='"+url+"' height=200 width=300></center>";
+                    document.getElementById("imagenGato").innerHTML = img;
+                    console.log("Click en botón BOTON XML HTTP REQUEST - Imagen Aleatoria Generada")
+                }
+            });
+
+            xhr.open("GET", "https://api.thecatapi.com/v1/images/search");
+            xhr.send();
+
+            //DATO ALEATORIO
+            const xhrDos = new XMLHttpRequest();
+
+            xhrDos.addEventListener("readystatechange", function () {
+                if (this.readyState === this.DONE) {
+                    let objetoDos = JSON.parse(this.responseText);
+                    document.getElementById("informacionGato").innerText = objetoDos.fact;
+                    console.log("Click en botón BOTON XML HTTP REQUEST - Información Aleatoria Generada")
+                }
+            });
+
+            xhrDos.open("GET", "https://catfact.ninja/fact");
+            xhrDos.send();
+            
+        })
+
+        //Petición JQuery
+        document.getElementById("btnPeticionJQuery").addEventListener("click",function()
+        {   
+        $.getJSON( "https://api.thecatapi.com/v1/images/search", function( json ) {
+
+            var url = json[0].url;
+            var img = "<center><img src ='"+url+"' height=200 width=300></center>";
+            document.getElementById("imagenGato").innerHTML = img;
+            console.log("Click en botón BOTON JQUERY - Imagen Aleatoria Generada")
+        });
+
+        $.getJSON( "https://catfact.ninja/fact", function( jsonDos ) {
+            document.getElementById("informacionGato").innerText = jsonDos.fact;
+            console.log("Click en botón BOTON JQUERY - Información Aleatoria Generada")
+        });
+        })
+
+        //Petición Axios
+        document.getElementById("btnPeticionAxios").addEventListener("click",function()
+        {
+            axios.get('https://api.thecatapi.com/v1/images/search')
+            .then(function (response) {
+                console.log(response.data[0].url);
+                var url = response.data[0].url;
+                var img = "<center><img src ='"+url+"' height=200 width=300></center>";
+                document.getElementById("imagenGato").innerHTML = img;
+                console.log("Click en botón BOTON AXIOS - Imagen Aleatoria Generada")
+            })
+
+            axios.get('https://catfact.ninja/fact')
+            .then(function (response) {
+                console.log(response.data.fact);
+                document.getElementById("informacionGato").innerText = response.data.fact;
+                console.log("Click en botón BOTON AXIOS - Información Aleatoria Generada")
+            })
+        })
+    </script>    
+</body>
+</html>
