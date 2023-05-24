@@ -64,51 +64,6 @@ const swaggerOptions = {
  *         codigoProducto:
  *           type: smallint
  *           description: Código identificador del producto alimenticio.
- *           example: 1
- *         nombreProducto:
- *           type: string
- *           description: Nombre del producto alimenticio.
- *           example: PAPAS SABRITAS ORIGINAL
- *         departamento:
- *           type: string
- *           description: Departamento al que pertenece dicho producto alimenticio ('Aceites y Mantecas', 'Bebidas alcohólicas', 'Botanas', etc.).
- *           example: Botanas
- *         proveedorProducto:
- *           type: string
- *           description: Nombre de la empresa proveedora del producto alimenticio.
- *           example: SABRITAS
- *         codigoProveedor:
- *           type: string
- *           description: Código identificador de la empresa proveedora del producto alimenticio.
- *           example: EP-12345
- *         precioCompra:
- *           type: decimal
- *           description: Precio de compra del producto alimenticio.
- *           example: 9.00
- *         precioVenta:
- *           type: decimal
- *           description: Precio de venta del producto alimenticio.
- *           example: 12.50
- *         cantProdVendidos:
- *           type: smallint
- *           description: Cantidad de productos alimenticios vendidos hasta el momento.
- *           example: 50
- *         cantProdExistentes:
- *           type: smallint
- *           description: Cantidad de productos alimenticios existentes hasta el momento.
- *           example: 5
- *         estadoProducto:
- *           type: string
- *           description: Estado de disponibilidad del producto alimenticio ('Disponible', 'No Disponible', 'Nuevo', 'Poco Inventario').
- *           example: Poco Inventario
- *       xml:
- *         name: productoAlimenticio
- *     productoAlimenticioAInsertar:
- *       type: object
- *       properties:
- *         codigoProducto:
- *           type: smallint
- *           description: Código identificador del producto alimenticio.
  *           example: 12
  *         nombreProducto:
  *           type: string
@@ -147,7 +102,7 @@ const swaggerOptions = {
  *           description: Estado de disponibilidad del producto alimenticio ('Disponible', 'No Disponible', 'Nuevo', 'Poco Inventario').
  *           example: Disponible
  *       xml:
- *         name: productoAlimenticioAInsertar
+ *         name: productoAlimenticio
  *     productoAlimenticioAEditar:
  *       type: object
  *       properties:
@@ -174,11 +129,11 @@ const swaggerOptions = {
  *         precioCompra:
  *           type: decimal
  *           description: Precio de compra del producto alimenticio.
- *           example: 26.50
+ *           example: 5.50
  *         precioVenta:
  *           type: decimal
  *           description: Precio de venta del producto alimenticio.
- *           example: 31.50
+ *           example: 10.50
  *         cantProdVendidos:
  *           type: smallint
  *           description: Cantidad de productos alimenticios vendidos hasta el momento.
@@ -272,13 +227,13 @@ const swaggerOptions = {
  *        content:
  *          application/json:
  *            schema:
- *              $ref: '#/components/schemas/productoAlimenticioAInsertar'
+ *              $ref: '#/components/schemas/productoAlimenticio'
  *          application/xml:
  *            schema:
- *              $ref: '#/components/schemas/productoAlimenticioAInsertar'
+ *              $ref: '#/components/schemas/productoAlimenticio'
  *          application/x-www-form-urlencoded:
  *            schema:
- *              $ref: '#/components/schemas/productoAlimenticioAInsertar'
+ *              $ref: '#/components/schemas/productoAlimenticio'
  *      responses:
  *        200:
  *          description: Inserción exitosa de un producto alimenticio a la tabla 'productosAlimenticios', guardada en la base de datos 'web18100248'.
